@@ -147,18 +147,16 @@ export class PeripheralNode extends PeripheralBaseNode {
             await Promise.all(promises);
             return true;
         } catch (e) {
-            /* This should never happen */
             const str = `AAAA Internal error: Failed to update peripheral ${this.name} after memory reads`;
             if (vscode.debug.activeDebugConsole) {
                 vscode.debug.activeDebugConsole.appendLine(str);
                 if (e instanceof Error) {
-                    vscode.debug.activeDebugConsole.appendLine("Exception Message: " + e.message);
-                    vscode.debug.activeDebugConsole.appendLine("Stack: " + (e.stack ?? "no stack"));
+                    vscode.debug.activeDebugConsole.appendLine('Message: ' + e.message);
+                    vscode.debug.activeDebugConsole.appendLine('Stack: ' + (e.stack ?? 'no stack'));
                 } else {
-                    vscode.debug.activeDebugConsole.appendLine("Non-error thrown: " + String(e));
+                    vscode.debug.activeDebugConsole.appendLine('Non-error thrown: ' + String(e));
                 }
             }
-            // Could return false, but some things could have been updated. Returning true triggers a GUI refresh
             return true;
         }
     }
