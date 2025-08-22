@@ -148,9 +148,10 @@ export class PeripheralNode extends PeripheralBaseNode {
             return true;
         } catch (e) {
             /* This should never happen */
-            const str = `Internal error: Failed to update peripheral ${this.name} after memory reads`;
+            const str = `AAAA Internal error: Failed to update peripheral ${this.name} after memory reads`;
             if (vscode.debug.activeDebugConsole) {
                 vscode.debug.activeDebugConsole.appendLine(str);
+                vscode.debug.activeDebugConsole.appendLine((e as Error).message);
             }
             // Could return false, but some things could have been updated. Returning true triggers a GUI refresh
             return true;
