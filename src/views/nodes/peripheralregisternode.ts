@@ -270,7 +270,11 @@ export class PeripheralRegisterNode extends ClusterOrRegisterBaseNode {
         const bc = this.size / 8;
         const bytes = this.parent.getBytes(this.offset, bc);
         if (!bytes || bytes.length < bc) {
-            console.error(`Register ${this.name}: expected ${bc} bytes, got ${bytes ? bytes.length : 0}`);
+            if (vscode.debug.activeDebugConsole) {
+                vscode.debug.activeDebugConsole.appendLine(
+                    `Register ${this.name}: expected ${bc} bytes, got ${bytes ? bytes.length : 0}`
+                );
+            }
         }
         const buffer = Buffer.from(bytes);
         switch (bc) {
